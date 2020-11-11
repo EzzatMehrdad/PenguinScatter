@@ -3,9 +3,14 @@ var getGrade=function(john){
     return john.grade;     
 }
 
-var getImage=function(bStudent)
+var getQuizeAverage=function(bStudent)
 {
-    return "imgs/"+bStudent.picture;}; 
+    var Qstut=bStudent.quizes; 
+    
+    var ScoreQ=Qstut.map(getGrade); 
+    var avg=d3.mean(ScoreQ);
+    return avg.toFixed(2);     
+}
 
 var getHmwAvg=function(bStudent){
     
@@ -21,7 +26,7 @@ var getFinalgrade=function(bStudent){
    
   var drawPlot=function(students, screen, xScale, yScale)
   {
-    d3.select("#graph")
+    d3.select("#graph1")
       .selectAll("circle")
       .data(students)
       .enter()
@@ -52,22 +57,13 @@ var getFinalgrade=function(bStudent){
             }
         }) 
       
-      .on("click", function(student)
+      .on("click", function()
          
          {
-        console.log("havoring");
         
-        var xPos = d3.pageX; 
-        var yPos = d3.pageY; 
-        
-         d3.select("#tooltip")
-          .classed("hidden", false)
-          .style("top", yPos+"px")
-          .style("left", xPos+"px")
-        
-        d3.select("#student")
-        .attr("src", getImage(student))
-         });
+         d3.select("#first")
+          .select("#graph1")
+          .classed("hidden", false) });
   }
   
             
